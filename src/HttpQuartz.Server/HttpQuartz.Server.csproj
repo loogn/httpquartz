@@ -1,0 +1,253 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>HttpQuartz.Server</AssemblyName>
+    <RootNamespace>HttpQuartz.Server</RootNamespace>
+    <PackageId>HttpQuartz.Server</PackageId>
+    <Authors>loogn</Authors>
+    <Company>HttpQuartz.Server</Company>
+    <Product>HttpQuartz.Server</Product>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1591;0649;0044</NoWarn>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Autowired.Core" Version="1.0.5" />
+    <PackageReference Include="Loogn.CoreHelper" Version="1.0.0" />
+    <PackageReference Include="Loogn.OrmLite" Version="3.0.9" />
+    <PackageReference Include="Loogn.OrmLite.MySql" Version="3.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.6" />
+    <PackageReference Include="MySql.Data" Version="8.0.20" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="Quartz" Version="3.0.7" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.0.7" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HttpQuartz.Client\HttpQuartz.Client.csproj" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="quartz.config">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="database\triggerDemo.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\kindeditor-all-min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\kindeditor-all.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\lang\zh-CN.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\license.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\anchor\anchor.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\autoheight\autoheight.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\baidumap\baidumap.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\baidumap\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\baidumap\map.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\clearhtml\clearhtml.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\code\code.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\code\prettify.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\code\prettify.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\emoticons.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\0.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\1.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\10.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\100.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\101.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\102.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\103.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\104.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\105.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\106.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\107.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\108.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\109.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\11.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\110.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\111.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\112.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\113.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\114.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\115.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\116.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\117.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\118.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\119.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\12.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\120.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\121.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\122.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\123.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\124.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\125.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\126.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\127.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\128.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\129.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\13.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\130.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\131.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\132.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\133.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\134.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\14.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\15.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\16.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\17.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\18.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\19.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\2.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\20.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\21.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\22.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\23.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\24.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\25.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\26.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\27.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\28.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\29.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\3.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\30.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\31.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\32.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\33.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\34.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\35.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\36.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\37.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\38.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\39.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\4.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\40.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\41.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\42.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\43.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\44.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\45.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\46.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\47.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\48.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\49.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\5.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\50.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\51.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\52.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\53.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\54.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\55.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\56.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\57.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\58.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\59.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\6.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\60.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\61.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\62.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\63.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\64.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\65.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\66.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\67.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\68.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\69.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\7.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\70.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\71.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\72.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\73.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\74.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\75.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\76.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\77.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\78.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\79.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\8.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\80.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\81.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\82.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\83.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\84.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\85.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\86.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\87.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\88.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\89.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\9.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\90.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\91.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\92.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\93.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\94.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\95.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\96.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\97.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\98.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\99.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\emoticons\images\static.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\filemanager\filemanager.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\filemanager\images\file-16.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\filemanager\images\file-64.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\filemanager\images\folder-16.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\filemanager\images\folder-64.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\filemanager\images\go-up.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\fixtoolbar\fixtoolbar.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\flash\flash.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\image\image.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\image\images\align_left.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\image\images\align_right.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\image\images\align_top.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\image\images\refresh.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\insertfile\insertfile.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\lineheight\lineheight.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\link\link.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\map\map.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\map\map.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\media\media.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\multiimage\images\image.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\multiimage\images\select-files-en.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\multiimage\images\select-files-zh-CN.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\multiimage\images\swfupload.swf" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\multiimage\multiimage.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\pagebreak\pagebreak.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\plainpaste\plainpaste.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\preview\preview.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\quickformat\quickformat.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\table\table.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\template\html\1.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\template\html\2.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\template\html\3.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\template\template.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\plugins\wordpaste\wordpaste.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\common\anchor.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\common\blank.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\common\flash.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\common\loading.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\common\media.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\common\rm.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\default\background.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\default\default.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\default\default.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\default\default.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\kindeditor\themes\simple\simple.css" />
+  </ItemGroup>
+
+ 
+</Project>

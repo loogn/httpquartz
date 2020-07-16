@@ -1,0 +1,182 @@
+﻿@using HttpQuartz.Server.Services
+@using HttpQuartz.Server.Tools
+@inject SystemResService systemResBusiness;
+@{
+    ViewBag.Title = "HttpQuartz";
+    var nickname = User.GetNickname();
+    var list = systemResBusiness.GetEmployeeResource(User.GetUserId()).Where(x => x.Type == 1);
+}
+
+@section Styles
+{
+    <script>
+        // 是否开启刷新记忆tab功能，默认是开启的
+        // var is_remember = false;
+    </script>
+}
+
+
+<div class="index">
+   
+    <!-- 中部开始 -->
+    <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+        <div class="logo">
+            @ViewBag.Title
+        </div>
+        <div id="side-nav">
+            <ul id="nav">
+
+                @foreach (var nav1 in list.Where(x => x.ParentId == 0).OrderBy(x => x.OrderNum))
+                {
+                    <li>
+                        <a class="topnav" href="javascript:;">
+                            <i class="layui-icon @nav1.Icon" ></i>
+                            <cite>@nav1.Name</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            @foreach (var nav2 in list.Where(x => x.ParentId == nav1.Id).OrderBy(x => x.OrderNum))
+                            {
+                                <li>
+                                    @if (!string.IsNullOrEmpty(nav2.Url))
+                                    {
+                                        <a onclick="xadmin.add_tab('@nav2.Name', '@nav2.Url',true)">
+                                            @* <i class="iconfont">&#xe6a7;</i> *@
+                                            <cite>@nav2.Name</cite>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="javascript:;">
+                                            <i class="iconfont left-nav-li" lay-tips="@nav1.Name">&#xe6a7;</i>
+                                            <cite>@nav1.Name</cite>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            @foreach (var nav3 in list.Where(x => x.ParentId == nav2.Id).OrderBy(x => x.OrderNum))
+                                            {
+                                                <li>
+                                                    <a onclick="xadmin.add_tab('@nav3.Name', '@nav3.Url',true)">
+                                                        @* <i class="iconfont">&#xe6a7;</i> *@
+                                                        <cite>@nav3.Name</cite>
+                                                    </a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <!-- 顶部开始 -->
+        <div class="container">
+
+
+            <div class="left_open top_icon">
+                <a>
+                    <i title="展开左侧栏" class="layui-icon layui-icon-shrink-right"></i>
+                </a>
+            </div>
+
+            <div class=" top_icon">
+                <a href="http://www.baidu.com" target="_blank">
+                    <i title="前台页面" class="layui-icon layui-icon-website"></i>
+                </a>
+            </div>
+            <div class="main_reflash top_icon">
+                <a>
+                    <i title="刷新主页" class="layui-icon layui-icon-refresh-3"></i>
+                </a>
+            </div>
+
+
+            @*<ul class="layui-nav left fast-add layui-hide" lay-filter="">
+            <li class="layui-nav-item">
+                <a href="javascript:;">+新增</a>
+                <dl class="layui-nav-child">
+
+                    <dd>
+                        <a onclick="xadmin.open('最大化', 'http://www.baidu.com', '', '', true)">
+                            <i class="iconfont">&#xe6a2;</i>弹出最大化
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.open('弹出自动宽高', 'http://www.baidu.com')">
+                            <i class="iconfont">&#xe6a8;</i>弹出自动宽高
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.open('弹出指定宽高', 'http://www.baidu.com', 500, 300)">
+                            <i class="iconfont">&#xe6a8;</i>弹出指定宽高
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.add_tab('在tab打开', 'member-list.html')">
+                            <i class="iconfont">&#xe6b8;</i>在tab打开
+                        </a>
+                    </dd>
+                    <dd>
+                        <a onclick="xadmin.add_tab('在tab打开刷新', 'member-del.html', true)">
+                            <i class="iconfont">&#xe6b8;</i>在tab打开刷新
+                        </a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>*@
+            <ul class="layui-nav right" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">@nickname</a>
+                    <dl class="layui-nav-child">
+                        <!-- 二级菜单 -->
+                        @* <dd> *@
+                        @*     <a onclick="xadmin.open('个人信息', 'http://www.baidu.com')">个人信息</a> *@
+                        @* </dd> *@
+                        <dd>
+                            <a href="###" onclick="xadmin.open('修改密码', '@Url.Action("updatepwd","account")',500, 300)">修改密码</a>
+                        </dd>
+                        <dd>
+                            <a href="@Url.Action("logout", "account")">退出</a>
+                        </dd>
+                    </dl>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- 顶部结束 -->
+
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li class="home">
+                    <i class="layui-icon layui-icon-home"></i>桌面
+                </li>
+            </ul>
+            <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                <dl>
+                    <dd data-type="this">关闭当前</dd>
+                    <dd data-type="other">关闭其它</dd>
+                    <dd data-type="all">关闭全部</dd>
+                </dl>
+            </div>
+            <div class="layui-tab-content" id="layui_tab_content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src='@Url.Action("welcome")' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                </div>
+            </div>
+            <div id="tab_show"></div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+    <style id="theme_style"></style>
+    <!-- 右侧主体结束 -->
+    <!-- 中部结束 -->
+
+</div>
