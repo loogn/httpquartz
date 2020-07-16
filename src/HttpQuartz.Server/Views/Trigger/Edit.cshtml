@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "编辑角色";
+
+}
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6">
+                    <div style="max-height: 550px; overflow: auto">
+                        <pre>@Html.Raw(ViewBag.doc)</pre>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <textarea style="min-height: 550px" id="json" class="layui-textarea">@Html.Raw(ViewBag.tpl)</textarea>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"></label>
+                            <button class="layui-btn" type="button" id="btn" >保存</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+    $("#btn").click(function(){
+       var json=$("#json").val();
+        console.log(json);
+        $.ajax({
+            type:"post",
+            url:'@Url.Action("ScheduleJob","Quartz")',
+            dataType:'text',
+            contentType: "application/json;charset=utf-8",
+            data:json,
+            success:function(result){
+                  layer.msg(result,
+                        { time: 1000 },
+                        function() {
+                            if (result=="success") {
+                                closeXWindow();
+                            }
+                        });
+            },
+              error:function () {
+                alert("网络异常，请稍后再试！");
+            }
+        });
+    });
+    </script>
+}

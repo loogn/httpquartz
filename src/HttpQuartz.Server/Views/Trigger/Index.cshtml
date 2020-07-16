@@ -1,0 +1,156 @@
+﻿@using System.Text
+@{
+    ViewData["Title"] = "触发器";
+    var plist = ViewBag.plist as StaticPagedList<QRTZ_TRIGGERS>;
+
+}
+
+<partial name="breadcrumb"/>
+
+<div class="layui-fluid">
+
+    <div class="layui-card">
+
+        <div class="layui-card-body">
+            <form class="layui-form" lay-filter="searchFrm">
+                <div class="layui-inline">
+                    <input class="layui-input ml-0" name="name" placeholder="名称" id="name" value="@Context.Request.Query["name"]"/>
+                </div>
+                <div class="layui-inline">
+                    <input class="layui-input ml-0" name="group" placeholder="分组" id="group" value="@Context.Request.Query["group"]"/>
+                </div>
+                <div class="layui-inline">
+                    <select class="layui-select" name="state" id="state">
+                        <option value="">-状态-</option>
+                        <option value="ACQUIRED">ACQUIRED</option>
+                        <option value="PAUSED">PAUSED</option>
+                        <option value="WAITING">WAITING</option>
+                        <option value="COMPLETE">COMPLETE</option>
+                    </select>
+
+                </div>
+
+                <div class="layui-inline">
+                    <select class="layui-select" name="type" id="type">
+                        <option value="">-类型-</option>
+                        <option value="SIMPLE">SIMPLE</option>
+                        <option value="CRON">CRON</option>
+                    </select>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                        <i class="layui-icon">&#xe615;</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="layui-card-header ">
+            <button class="layui-btn layui-btn-normal" onclick="xadmin.open('添加触发器', '@Url.Action("Edit", new {parentId = 0})', 0,0,true)">
+                <i class="layui-icon layui-icon-add-circle-fine"></i>添加
+            </button>
+        </div>
+        <div class="layui-card-body">
+
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>分组</th>
+                    @* <th>下次触发时间</th> *@
+                    @* <th>上次触发时间</th> *@
+                    @* <th>优先级</th> *@
+                    <th>状态</th>
+                    <th>类型</th>
+                    @* <th>开始时间</th> *@
+                    @* <th>结束时间</th> *@
+                    <th>失火策略</th>
+                    <th>关联数据</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in plist)
+                {
+                    <tr>
+                        <td>@item.TRIGGER_NAME</td>
+                        <td>@item.TRIGGER_GROUP</td>
+                        @* <td>@item.NEXT_FIRE_TIME</td> *@
+                        @* <td>@item.PREV_FIRE_TIME</td> *@
+                        @* <td>@item.PRIORITY</td> *@
+                        <td>@item.TRIGGER_STATE</td>
+                        <td>@item.TRIGGER_TYPE</td>
+                        @* <td>@item.START_TIME</td> *@
+                        @* <td>@item.END_TIME</td> *@
+                        <td>@item.MISFIRE_INSTR</td>
+                        <td> @Encoding.UTF8.GetString(item.JOB_DATA) </td>
+
+                        <td class="td-manage">
+                            <div class="layui-btn-group">
+                                @if (item.TRIGGER_STATE == "PAUSED")
+                                {
+                                    <button type="button" class="layui-btn" onclick="ResumeTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">恢复</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="layui-btn" onclick="PauseTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">暂停</button>
+                                }
+                                <button type="button" class="layui-btn layui-btn-danger" onclick="UnscheduleJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+    
+    $(function(){
+        
+       $("#state").val('@Context.Request.Query["state"]');
+       $("#type").val('@Context.Request.Query["type"]');
+       layui.form.render('select', 'searchFrm');
+        
+    });
+    
+    function UnscheduleJob(name,group){
+        layer.confirm('确定要删除触发器吗？',
+                        function() {
+                            $.post("@Url.Action("UnscheduleJob")",
+                                { name: name,group:group },
+                                function(ro) {
+                                    layer.msg(ro.msg,
+                                        { time: 500 },
+                                        function() {
+                                            if (ro.success) {
+                                                location.reload();
+                                            }
+                                        });
+                                });
+                        });
+                }
+                
+    function ResumeTrigger(name,group){
+         $.post("@Url.Action("ResumeTrigger")",
+                                         { name: name,group:group },
+         function(ro) {
+             location.reload();
+         });
+    }
+           
+    function PauseTrigger(name,group){
+        $.post("@Url.Action("PauseTrigger")",
+        { name: name,group:group },
+        function(ro) {
+            location.reload();
+        });
+    }
+
+    </script>
+}

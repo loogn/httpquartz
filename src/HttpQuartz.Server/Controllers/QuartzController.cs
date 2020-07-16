@@ -15,6 +15,9 @@ using IntervalUnit = Quartz.IntervalUnit;
 
 namespace HttpQuartz.Server.Controllers
 {
+    /// <summary>
+    /// 外部API
+    /// </summary>
     [AllowAnonymous]
     public class QuartzController : Controller
     {
@@ -42,10 +45,22 @@ namespace HttpQuartz.Server.Controllers
                 var key = new TriggerKey(model.Key.Name, model.Key.Group);
                 var builder = TriggerBuilder.Create();
                 builder.WithIdentity(key);
-                builder.StartAt(model.StartTime);
+                if (model.StartTime.HasValue)
+                {
+                    builder.StartAt(model.StartTime.Value);
+                }
+                else
+                {
+                    builder.StartNow();
+                }
+
                 builder.EndAt(model.EndTime);
                 builder.ForJob(HttpJob.JobKey);
-                builder.WithPriority(model.Priority);
+                if (model.Priority.HasValue)
+                {
+                    builder.WithPriority(model.Priority.Value);
+                }
+
                 builder.UsingJobData("method", model.JobData.method);
                 builder.UsingJobData("timeout", model.JobData.timeout.ToString());
                 builder.UsingJobData("url", model.JobData.url);

@@ -1,0 +1,46 @@
+{
+    "Key": {
+        "Name": "触发器名称  string",
+        "Group": "触发器组名  string"
+    },
+    "Reschedule": "如果key重复是否替换  bool",
+    "Priority": "优先级，默认是5  int?",
+    "StartTime": "开始时间  DateTimeOffset?",
+    "EndTime": "结束时间  DateTimeOffset?",
+    "JobData": {
+        "method": "请求方法，默认GET  string",
+        "url": "请求地址  string",
+        "timeout": "请求超时秒数，默认100秒 int?",
+        "expRefire": "异常时是否立即再次触发,默认false  bool",
+        "expRemove": "异常时是否移除,默认false  bool"
+    },
+    "SimpleTrigger": {
+        "RepeatInterval": "重复时间间隔  TimeSpan",
+        "RepeatCount": "重复次数，默认-1是永久重复  int",
+        "MisfireInstruction": "失火指令  int"
+    },
+    "CronTrigger": {
+        "CronExpression": "cron表达式  string",
+        "MisfireInstruction": "失火指令  int"
+    },
+    "CalendarIntervalTrigger": {
+        "RepeatInterval": "重复间隔时间  int",
+        "RepeatIntervalUnit": "重复间隔单位 0-毫秒,1-秒,2-分,3-时,4-天,5-周,6-月,7-年   int",
+        "MisfireInstruction": "失火指令  int",
+        "PreserveHourOfDayAcrossDaylightSavings": false,
+        "SkipDayIfHourDoesNotExist": false
+    },
+    "DailyTimeIntervalTrigger": {
+        "RepeatInterval": "重复间隔时间  int",
+        "RepeatIntervalUnit": "重复间隔单位 0-毫秒,1-秒,2-分,3-时,4-天,5-周,6-月,7-年   int",
+        "RepeatCount": "重复次数，默认-1是永久重复  int",
+        "StartTimeOfDay": {
+            "Hour": 3,
+            "Minute": 3,
+            "Second": 3
+        },
+        "EndTimeOfDay": "当天结束时间  TimeOfDay",
+        "DaysOfWeek": "有效周天集合,0-周日,1-周一,2-周二,3-周三,4-周四,5-周五,6-周六  int[]",
+        "MisfireInstruction": "失火指令  int"
+    }
+}

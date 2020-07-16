@@ -2,6 +2,15 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Title>HttpQuartz.Client</Title>
+        <Authors>loogn</Authors>
+        <Description>HttpQuartz Api tools</Description>
+        <Copyright>loogn@2020</Copyright>
+        <PackageProjectUrl>https://gitee.com/loogn/httpquartz</PackageProjectUrl>
+        <PackageTags>quartz,http</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>

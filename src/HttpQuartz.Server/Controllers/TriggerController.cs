@@ -1,0 +1,63 @@
+using System.Threading.Tasks;
+using Autowired.Core;
+using CoreHelper;
+using HttpQuartz.Server.Services;
+using HttpQuartz.Server.Tools;
+using Microsoft.AspNetCore.Mvc;
+using Quartz;
+
+namespace HttpQuartz.Server.Controllers
+{
+    public class TriggerController : MvcController
+    {
+        [Autowired] private QRTZ_TRIGGERSService service;
+        [Autowired] private IScheduler scheduler;
+
+        public TriggerController(AutowiredService autowiredService)
+        {
+            autowiredService.Autowired(this);
+        }
+
+        public IActionResult Index(string name, string group, string state,
+            string type, int page = 1)
+        {
+            int pageSize = 10;
+            var plist = service.SelectPage(scheduler.SchedulerName, name, group, state, type, page, pageSize);
+            ViewBag.plist = plist.ToStaticPagedList();
+
+            return View();
+        }
+
+
+        public IActionResult Edit()
+        {
+            var doc = System.IO.File.ReadAllText("triggerDoc.json");
+            var tpl = System.IO.File.ReadAllText("triggerTpl.json");
+            ViewBag.doc = doc;
+            ViewBag.tpl = tpl;
+            return View();
+        }
+
+
+        public async Task<ResultObject> UnscheduleJob(string name, string group)
+        {
+            var key = new TriggerKey(name, group);
+            var flag = await scheduler.UnscheduleJob(key);
+            return new ResultObject(flag);
+        }
+
+        public async Task<ResultObject> PauseTrigger(string name, string group)
+        {
+            var key = new TriggerKey(name, group);
+            await scheduler.PauseTrigger(key);
+            return new ResultObject(true);
+        }
+
+        public async Task<ResultObject> ResumeTrigger(string name, string group)
+        {
+            var key = new TriggerKey(name, group);
+            await scheduler.ResumeTrigger(key);
+            return new ResultObject(true);
+        }
+    }
+}

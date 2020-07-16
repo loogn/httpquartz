@@ -8,7 +8,7 @@
     "StartTime": "2020-07-16T11:40:13.315771+08:00",
     "EndTime": null,
     "JobData": {
-        "method": null,
+        "method": "GET",
         "url": "http://localhost:5000/home/Time",
         "timeout": 100,
         "expRefire": false,
@@ -20,7 +20,7 @@
         "misfireInstruction": 0
     },
     "CronTrigger": {
-        "CronExpression": null,
+        "CronExpression": "0,12 * * * * ?",
         "MisfireInstruction": 0
     },
     "CalendarIntervalTrigger": {

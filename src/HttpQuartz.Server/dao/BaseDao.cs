@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
 using Autowired.Core;
 using Loogn.OrmLite;
 using Loogn.OrmLite.MySql;

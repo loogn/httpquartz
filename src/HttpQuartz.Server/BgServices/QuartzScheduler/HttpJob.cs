@@ -29,6 +29,7 @@ namespace HttpQuartz.Server.BgServices.QuartzScheduler
                 var timeoutStr = context.Trigger.JobDataMap.TryGetAndReturn("timeout")?.ToString();
                 var expRefire = context.Trigger.JobDataMap.TryGetAndReturn("expRefire")?.ToString();
                 var expRemove = context.Trigger.JobDataMap.TryGetAndReturn("expRemove")?.ToString();
+                var body = context.Trigger.JobDataMap.TryGetAndReturn("body")?.ToString();
                 /*
                  * Trigger.JobDataMap中的值和说明,值全部使用string表示
                  * method:请求方法,GET|POST，默认GET
@@ -78,7 +79,6 @@ namespace HttpQuartz.Server.BgServices.QuartzScheduler
                     }
                     else if ("POST".Equals(method, StringComparison.Ordinal))
                     {
-                        var body = context.Trigger.JobDataMap.TryGetAndReturn("body")?.ToString();
                         StringContent stringContent = new StringContent(body ?? "");
                         responseMessage = await client.PostAsync(url, stringContent);
                     }

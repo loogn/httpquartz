@@ -19,12 +19,12 @@ namespace HttpQuartz.Client.Models
         /// <summary>
         /// 权重
         /// </summary>
-        public int Priority { get; set; } = 5;
+        public int? Priority { get; set; }
 
         /// <summary>
         /// 开始时间
         /// </summary>
-        public DateTimeOffset StartTime { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? StartTime { get; set; } = DateTimeOffset.UtcNow;
 
         /// <summary>
         /// 结束时间【选填】

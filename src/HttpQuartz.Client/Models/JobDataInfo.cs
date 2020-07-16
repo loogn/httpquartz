@@ -8,7 +8,12 @@ namespace HttpQuartz.Client.Models
         /// <summary>
         /// 请求方法,GET|POST，默认GET
         /// </summary>
-        public string method { get; set; }
+        public string method { get; set; } = "GET";
+
+        /// <summary>
+        /// 请求体
+        /// </summary>
+        public string body { get; set; }
 
         /// <summary>
         /// 请求地址
@@ -18,7 +23,7 @@ namespace HttpQuartz.Client.Models
         /// <summary>
         /// 请求超时时间，默认100，单位秒
         /// </summary>
-        public int timeout { get; set; } = 100;
+        public int? timeout { get; set; } = 100;
 
         /// <summary>
         /// 异常时是否立即再次触发，true|false，默认false
@@ -30,5 +35,4 @@ namespace HttpQuartz.Client.Models
         /// </summary>
         public bool expRemove { get; set; }
     }
-
 }
