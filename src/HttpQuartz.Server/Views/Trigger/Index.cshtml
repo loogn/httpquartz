@@ -4,7 +4,16 @@
     var plist = ViewBag.plist as StaticPagedList<QRTZ_TRIGGERS>;
 
 }
-
+@section Styles
+{
+    <style>
+        .tag{
+            color: #666;
+            padding: 3px;
+            background-color: #eee;
+        }
+    </style>
+}
 <partial name="breadcrumb"/>
 
 <div class="layui-fluid">
@@ -57,16 +66,10 @@
                 <thead>
                 <tr>
                     <th>名称</th>
-                    <th>分组</th>
-                    @* <th>下次触发时间</th> *@
-                    @* <th>上次触发时间</th> *@
-                    @* <th>优先级</th> *@
-                    <th>状态</th>
                     <th>类型</th>
-                    @* <th>开始时间</th> *@
-                    @* <th>结束时间</th> *@
-                    <th>失火策略</th>
-                    <th>关联数据</th>
+                    <th>触发时间</th>
+                    <th>时间周期</th>
+                    <th style="width: 30%">关联数据</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -74,29 +77,33 @@
                 @foreach (var item in plist)
                 {
                     <tr>
-                        <td>@item.TRIGGER_NAME</td>
-                        <td>@item.TRIGGER_GROUP</td>
-                        @* <td>@item.NEXT_FIRE_TIME</td> *@
-                        @* <td>@item.PREV_FIRE_TIME</td> *@
-                        @* <td>@item.PRIORITY</td> *@
-                        <td>@item.TRIGGER_STATE</td>
                         <td>
-                            <a href="javascript:;" onclick="xadmin.open('触发器详细', '@Url.Action("Detail", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 300,200)">@item.TRIGGER_TYPE</a>
+                            @(item.TRIGGER_GROUP + "." + item.TRIGGER_NAME)<br/>
+                             <small class="tag">@item.TRIGGER_STATE</small>
                         </td>
-                        @* <td>@item.START_TIME</td> *@
-                        @* <td>@item.END_TIME</td> *@
-                        <td>@item.MISFIRE_INSTR</td>
+                        <td>
+                            <a href="javascript:;" onclick="xadmin.open('触发器详细', '@Url.Action("Detail", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 300,200)">@item.TRIGGER_TYPE</a><br/>
+                            @item.GetMisFireINSTR()
+                        </td>
+                        <td>
+                            上次： @item.GetTime(item.PREV_FIRE_TIME) <br/>
+                            下次：@item.GetTime(item.NEXT_FIRE_TIME)
+                        </td>
+                        <td>
+                            开始：@item.GetTime(item.START_TIME)<br/>
+                            结束：@item.GetTime(item.END_TIME)
+                        </td>
                         <td> @Encoding.UTF8.GetString(item.JOB_DATA) </td>
-
                         <td class="td-manage">
                             <div class="layui-btn-group">
+                              
                                 @if (item.TRIGGER_STATE == "PAUSED")
                                 {
-                                    <button type="button" class="layui-btn" onclick="ResumeTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">恢复</button>
+                                    <button type="button" class="layui-btn layui-btn-warm" onclick="ResumeTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">恢复</button>
                                 }
                                 else
                                 {
-                                    <button type="button" class="layui-btn" onclick="PauseTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">暂停</button>
+                                    <button type="button" class="layui-btn  layui-btn-normal" onclick="PauseTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">暂停</button>
                                 }
                                 <button type="button" class="layui-btn layui-btn-danger" onclick="UnscheduleJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">删除</button>
                             </div>
