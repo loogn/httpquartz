@@ -1,22 +1,65 @@
-# NetApiStarter
+# HttpQuartz
 
-### 介绍
-基于netcore 3.1 的api模板项目，其中包含swagger文档，jwt权限验证，模型验证，日志，ioc，appEvent，分块上传等等现成的功能，帮你快速开始api的构建
-
-
-#### SwaggerAPI文档
-
-![apidoc](/img/api.png)  
-
-### 后台管理部分截图
+### 项目说明
+基于Quartz.Net、Polly的Http远程调度系统，netcore3.1+mysql数据库。
+在服务端有HttpJob提供http远程调度，客户端通过对trigger的操作来实现调度任务的管理，
+通过trigger的JobData传输http请求的相关数据。
 
 
-#### 资源管理
+#### 功能介绍
+- 添加任务
+- 删除任务
+- 暂停任务
+- 恢复任务
+- 日志查看
+- API客户端
+- IU管理
 
-![资源管理](/img/res.png)  
 
-#### 用户-角色  
-![用户角色](/img/user_role.png)
+#### 服务端部署
 
-#### 角色-资源
-![角色资源](/img/role_res.png)
+1. 新建mysql数据库httpquartz  
+2. 执行表结构和数据文件/src/HttpQuartz.Server/database/httpquartz.sql    
+3. 修改appsettings.json中数据库连接信息  
+4. 配置appsettings.json中SafeClients节点，使信任客户端可以使用HttpAPI 
+5. 部署HttpQuartz.Server项目(asp.netcore 3.1项目)  
+6. 用户名是：admin，密码是：123456  
+
+
+#### API客户端
+
+安装：
+```c#
+Install-Package HttpQuartz.Client -Version 0.0.1
+```
+
+使用：
+```c#
+    //实例化HttpClient，或者通过容器获取，并设置BaseAddress为HttpQuartz.Server的部署地址
+    using var client = new HttpClient {BaseAddress = new Uri("http://localhost:5000")};
+    var httpQuartzClient = new HttpQuartzClient(client);
+
+    //添加新任务(添加触发器)，成功返回success字符串
+    var result = await httpQuartzClient.ScheduleJob(new TriggerModel()
+    {
+        Key = new TriggerKeyModel("test", "test"),
+        StartTime = DateTimeOffset.Now.AddSeconds(30),
+        JobData = new JobDataInfo()
+        {
+            url = "http://www.baidu.com",
+        },
+        SimpleTrigger = new SimpleTriggerInfo()
+        {
+            RepeatInterval = TimeSpan.FromSeconds(10)
+        },
+    });
+```
+
+#### 相关
+
+[Quartz.Net项目](http://wwww.baidu.com)  
+ 
+[Polly项目](http://www.thepollyproject.org/)
+
+[LayUI项目](https://www.layui.com/)
+
