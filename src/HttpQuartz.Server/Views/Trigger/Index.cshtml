@@ -80,7 +80,9 @@
                         @* <td>@item.PREV_FIRE_TIME</td> *@
                         @* <td>@item.PRIORITY</td> *@
                         <td>@item.TRIGGER_STATE</td>
-                        <td>@item.TRIGGER_TYPE</td>
+                        <td>
+                            <a href="javascript:;" onclick="xadmin.open('触发器详细', '@Url.Action("Detail", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 300,200)">@item.TRIGGER_TYPE</a>
+                        </td>
                         @* <td>@item.START_TIME</td> *@
                         @* <td>@item.END_TIME</td> *@
                         <td>@item.MISFIRE_INSTR</td>

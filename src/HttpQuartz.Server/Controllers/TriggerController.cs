@@ -39,9 +39,23 @@ namespace HttpQuartz.Server.Controllers
             return View();
         }
 
+        public IActionResult Detail(string name, string group, string type)
+        {
+            if ("CRON".Equals(type, StringComparison.Ordinal))
+            {
+                ViewBag.cron = service.SingleCronTrigger(scheduler.SchedulerName, name, group);
+            }
+            else if ("SIMPLE".Equals(type, StringComparison.Ordinal))
+            {
+                ViewBag.simple = service.SingleSimpleTrigger(scheduler.SchedulerName, name, group);
+            }
+
+            return View();
+        }
+
         public IActionResult Log(DateTime? date)
         {
-            if(date==null) date=DateTime.Now;
+            if (date == null) date = DateTime.Now;
             var file = $"logs/{date.Value:yyyyMMdd}.log";
             var content = string.Empty;
             if (System.IO.File.Exists(file))

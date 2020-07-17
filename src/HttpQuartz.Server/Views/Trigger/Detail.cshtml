@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "触发器详细";
+    var simple = ViewBag.simple as QRTZ_SIMPLE_TRIGGERS;
+    var cron = ViewBag.cron as QRTZ_CRON_TRIGGERS;
+}
+
+<partial name="breadcrumb"/>
+
+<div class="layui-fluid">
+
+    <div class="layui-card">
+
+        <div class="layui-card-body">
+
+            @if (simple != null)
+            {
+                <div>
+                    <p>时间间隔: @(TimeSpan.FromMilliseconds(simple.REPEAT_INTERVAL).ToString())</p>
+                    <p>触发次数: @simple.TIMES_TRIGGERED </p>
+                    <p>重复次数: @simple.REPEAT_COUNT </p>
+                </div>
+            }
+            else if (cron != null)
+            {
+                <div>
+                    <p>cron表达式: @cron.CRON_EXPRESSION</p>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

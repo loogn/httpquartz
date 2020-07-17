@@ -36,5 +36,12 @@
   <ItemGroup>
     <ProjectReference Include="..\HttpQuartz.Client\HttpQuartz.Client.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Trigger\Detail.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
   
 </Project>
