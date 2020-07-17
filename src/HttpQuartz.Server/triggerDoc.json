@@ -17,16 +17,16 @@
     "SimpleTrigger": {
         "RepeatInterval": "重复时间间隔  TimeSpan",
         "RepeatCount": "重复次数，默认-1是永久重复  int",
-        "MisfireInstruction": "失火指令  int"
+        "MisfireInstruction": "失火指令  int <br/>-1：IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务 <br/>1：FireNow：忽略已经MisFire的任务，并立即执行调度（只执行一次调度的默认值）<br/> 2：RescheduleNowWithExistingRepeatCount：将startTime设置当前时间，立即重新调度任务，包括MisFire的（其他情况的默认值）<br/> 3：RescheduleNowWithRemainingRepeatCount：将startTime设置当前时间，立即重新调度任务，忽略MisFire的<br/> 4：RescheduleNextWithRemainingCount：在一下次调度时间点调度任务，忽略MisFire的（无限重复调度的默认值）<br/> 5：RescheduleNextWithExistingCount：在下一次调度时间点调度任务，并包括MisFire的"
     },
     "CronTrigger": {
         "CronExpression": "cron表达式  string",
-        "MisfireInstruction": "失火指令  int"
+        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int"
     },
     "CalendarIntervalTrigger": {
         "RepeatInterval": "重复间隔时间  int",
         "RepeatIntervalUnit": "重复间隔单位 0-毫秒,1-秒,2-分,3-时,4-天,5-周,6-月,7-年   int",
-        "MisfireInstruction": "失火指令  int",
+        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int",
         "PreserveHourOfDayAcrossDaylightSavings": false,
         "SkipDayIfHourDoesNotExist": false
     },
@@ -41,6 +41,6 @@
         },
         "EndTimeOfDay": "当天结束时间  TimeOfDay",
         "DaysOfWeek": "有效周天集合,0-周日,1-周一,2-周二,3-周三,4-周四,5-周五,6-周六  int[]",
-        "MisfireInstruction": "失火指令  int"
+        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int"
     }
 }

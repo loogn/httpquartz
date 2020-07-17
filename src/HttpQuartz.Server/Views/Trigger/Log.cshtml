@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "日志";
+
+}
+
+<partial name="breadcrumb"/>
+
+<div class="layui-fluid">
+
+    <div class="layui-card">
+
+        <div class="layui-card-body">
+            <form class="layui-form" lay-filter="searchFrm" id="frm">
+                <div class="layui-inline">
+                    <input class="layui-input ml-0" name="date" placeholder="日期" id="date" value="@Context.Request.Query["date"]"/>
+                </div>
+
+                <div class="layui-inline">
+                    <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                        <i class="layui-icon">&#xe615;</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-body">
+            <div style="max-height: 600px;
+                            background-color: #333;
+                            overflow: auto;
+                            color: #fff;
+                            padding: 10px;">
+                <pre>@Html.Raw(ViewBag.content)</pre>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+var laydate = layui.laydate;
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#date' //指定元素
+     ,max: '@DateTime.Now.ToString("yyyy-MM-dd")'
+     ,done: function(value, date, endDate){
+        $("#frm").submit();
+       }
+  });
+    </script>
+}

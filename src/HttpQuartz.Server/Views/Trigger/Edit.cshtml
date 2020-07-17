@@ -12,6 +12,7 @@
                     <div style="max-height: 550px; overflow: auto">
                         <pre>@Html.Raw(ViewBag.doc)</pre>
                     </div>
+                    <p style="color:#cccccc;">触发器说明，4个Trigger最多可以存在1个</p>
                 </div>
                 <div class="layui-col-md6">
                     <form class="layui-form">
@@ -19,8 +20,7 @@
                             <textarea style="min-height: 550px" id="json" class="layui-textarea">@Html.Raw(ViewBag.tpl)</textarea>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label"></label>
-                            <button class="layui-btn" type="button" id="btn" >保存</button>
+                            <button class="layui-btn" type="button" id="btn">添加触发器</button>
                         </div>
                     </form>
                 </div>

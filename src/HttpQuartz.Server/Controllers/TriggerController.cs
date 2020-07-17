@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Autowired.Core;
 using CoreHelper;
@@ -38,6 +39,19 @@ namespace HttpQuartz.Server.Controllers
             return View();
         }
 
+        public IActionResult Log(DateTime? date)
+        {
+            if(date==null) date=DateTime.Now;
+            var file = $"logs/{date.Value:yyyyMMdd}.log";
+            var content = string.Empty;
+            if (System.IO.File.Exists(file))
+            {
+                content = System.IO.File.ReadAllText(file);
+            }
+
+            ViewBag.content = content;
+            return View();
+        }
 
         public async Task<ResultObject> UnscheduleJob(string name, string group)
         {

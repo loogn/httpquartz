@@ -11,7 +11,7 @@
  Target Server Version : 50730
  File Encoding         : 65001
 
- Date: 16/07/2020 11:51:14
+ Date: 17/07/2020 09:49:34
 */
 
 SET NAMES utf8mb4;
@@ -55,6 +55,13 @@ CREATE TABLE `QRTZ_CRON_TRIGGERS` (
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   CONSTRAINT `QRTZ_CRON_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of QRTZ_CRON_TRIGGERS
+-- ----------------------------
+BEGIN;
+INSERT INTO `QRTZ_CRON_TRIGGERS` VALUES ('MyScheduler', 'test', 'test', '12 * * * * ?', 'PRC');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for QRTZ_FIRED_TRIGGERS
@@ -219,6 +226,13 @@ CREATE TABLE `QRTZ_TRIGGERS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Records of QRTZ_TRIGGERS
+-- ----------------------------
+BEGIN;
+INSERT INTO `QRTZ_TRIGGERS` VALUES ('MyScheduler', 'test', 'test', 'httpjob', 'global', NULL, 637305474120000000, 637305473520000000, 5, 'WAITING', 'CRON', 637304907840000000, NULL, NULL, 0, 0x7B226D6574686F64223A22474554222C2274696D656F7574223A22313030222C2275726C223A22687474703A2F2F6C6F63616C686F73743A353030302F686F6D652F54696D65222C22657870526566697265223A2246616C7365222C2265787052656D6F7665223A2246616C7365227D);
+COMMIT;
+
+-- ----------------------------
 -- Table structure for SystemRes
 -- ----------------------------
 DROP TABLE IF EXISTS `SystemRes`;
@@ -236,16 +250,19 @@ CREATE TABLE `SystemRes` (
   `Icon` varchar(50) NOT NULL DEFAULT '' COMMENT '图标',
   `Operations` varchar(200) NOT NULL DEFAULT '' COMMENT '操作',
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of SystemRes
 -- ----------------------------
 BEGIN;
-INSERT INTO `SystemRes` VALUES (1, '权限', '', '', 1, 1, 999, 0, '', '2019-07-18 13:42:02', '', '');
+INSERT INTO `SystemRes` VALUES (1, '权限', '', '', 1, 1, 999, 0, '', '2019-07-18 13:42:02', 'layui-icon-auz', '');
 INSERT INTO `SystemRes` VALUES (2, '用户管理', '/systemuser/list', '', 1, 1, 1, 1, '', '2019-07-18 13:42:08', '', '查看，编辑，删除');
 INSERT INTO `SystemRes` VALUES (3, '角色管理', '/systemrole/list', '', 1, 1, 2, 1, '', '2019-07-18 13:43:02', '', '查看，编辑，删除');
 INSERT INTO `SystemRes` VALUES (4, '资源管理', '/systemres/list', '', 1, 1, 3, 1, '', '2019-07-18 13:43:34', '', '查看，编辑，删除');
+INSERT INTO `SystemRes` VALUES (29, 'HttpQuartz', '', '', 1, 1, 0, 0, '', '2020-07-16 14:54:03', 'layui-icon-engine', '查看');
+INSERT INTO `SystemRes` VALUES (30, '触发器', '/Trigger/index', '', 1, 1, 0, 29, '', '2020-07-16 14:54:52', '', '查看');
+INSERT INTO `SystemRes` VALUES (31, '日志', '/Trigger/log', '', 1, 1, 0, 29, '', '2020-07-17 09:36:21', '', '查看');
 COMMIT;
 
 -- ----------------------------
@@ -275,16 +292,19 @@ CREATE TABLE `SystemRole_Res` (
   `SystemResId` bigint(20) NOT NULL,
   `Operations` varchar(200) NOT NULL DEFAULT '' COMMENT '操作',
   PRIMARY KEY (`Id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of SystemRole_Res
 -- ----------------------------
 BEGIN;
-INSERT INTO `SystemRole_Res` VALUES (188, 1, 1, '');
-INSERT INTO `SystemRole_Res` VALUES (189, 1, 2, '查看,编辑,删除');
-INSERT INTO `SystemRole_Res` VALUES (190, 1, 3, '查看,编辑,删除');
-INSERT INTO `SystemRole_Res` VALUES (191, 1, 4, '查看,编辑,删除');
+INSERT INTO `SystemRole_Res` VALUES (198, 1, 29, '');
+INSERT INTO `SystemRole_Res` VALUES (199, 1, 30, '查看');
+INSERT INTO `SystemRole_Res` VALUES (200, 1, 31, '查看');
+INSERT INTO `SystemRole_Res` VALUES (201, 1, 1, '');
+INSERT INTO `SystemRole_Res` VALUES (202, 1, 2, '查看,编辑,删除');
+INSERT INTO `SystemRole_Res` VALUES (203, 1, 3, '查看,编辑,删除');
+INSERT INTO `SystemRole_Res` VALUES (204, 1, 4, '查看,编辑,删除');
 COMMIT;
 
 -- ----------------------------

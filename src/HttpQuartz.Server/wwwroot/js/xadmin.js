@@ -23,7 +23,7 @@
 
     for(var i in cate_list){
       if(cate_list[i]!=null){
-          console.log('end');
+          
         $('.left-nav #nav li').eq(cate_list[i]).click();
       }
     }
@@ -51,7 +51,7 @@
   Xadmin.prototype.del_tab = function (id) {
 
     if(id){
-      console.log(88);
+      
     }else{
       var id = $(window.frameElement).attr('tab-id');
       parent.element.tabDelete('xbs_tab', id);
