@@ -20,7 +20,7 @@
 
 1. 新建mysql数据库httpquartz  
 2. 执行表结构和数据文件/src/HttpQuartz.Server/database/httpquartz.sql    
-3. 修改appsettings.json中数据库连接信息  
+3. 修改appsettings.json和quartz.config中数据库连接信息  
 4. 配置appsettings.json中SafeClients节点，使信任客户端可以使用HttpAPI 
 5. 部署HttpQuartz.Server项目(asp.netcore 3.1项目)  
 6. 用户名是：admin，密码是：123456  
