@@ -17,7 +17,7 @@ namespace HttpQuartz.Server.dao.Models
         //
         // public string JOB_GROUP { get; set; }
 
-        // public string DESCRIPTION { get; set; }
+        public string DESCRIPTION { get; set; }
 
         public long? NEXT_FIRE_TIME { get; set; }
 
@@ -90,7 +90,6 @@ namespace HttpQuartz.Server.dao.Models
                 }
             }
         }
-
-        //"失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int"
+        
     }
 }

@@ -12,6 +12,10 @@ namespace HttpQuartz.Client.Models
         public TriggerKeyModel Key { get; set; }
 
         /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
         /// 如果key相同，是否重新加入调度器
         /// </summary>
         public bool Reschedule { get; set; } = true;

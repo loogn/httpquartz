@@ -45,6 +45,10 @@ namespace HttpQuartz.Server.Controllers
                 var key = new TriggerKey(model.Key.Name, model.Key.Group);
                 var builder = TriggerBuilder.Create();
                 builder.WithIdentity(key);
+                if (!string.IsNullOrEmpty(model.Description))
+                {
+                    builder.WithDescription(model.Description);
+                }
                 if (model.StartTime.HasValue)
                 {
                     builder.StartAt(model.StartTime.Value);

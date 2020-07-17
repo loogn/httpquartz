@@ -9,7 +9,7 @@
     <style>
         .tag{
             color: #666;
-            padding: 3px;
+            padding: 2px;
             background-color: #eee;
         }
     </style>
@@ -65,7 +65,7 @@
             <table class="layui-table">
                 <thead>
                 <tr>
-                    <th>名称</th>
+                    <th>基本信息</th>
                     <th>类型</th>
                     <th>触发时间</th>
                     <th>时间周期</th>
@@ -79,7 +79,8 @@
                     <tr>
                         <td>
                             @(item.TRIGGER_GROUP + "." + item.TRIGGER_NAME)<br/>
-                             <small class="tag">@item.TRIGGER_STATE</small>
+                            <small class="tag">@item.TRIGGER_STATE</small><br/>
+                            @item.DESCRIPTION
                         </td>
                         <td>
                             <a href="javascript:;" onclick="xadmin.open('触发器详细', '@Url.Action("Detail", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 300,200)">@item.TRIGGER_TYPE</a><br/>

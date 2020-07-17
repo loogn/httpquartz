@@ -3,6 +3,7 @@
         "Name": "触发器名称  string",
         "Group": "触发器组名  string"
     },
+    "Description":"描述 string",
     "Reschedule": "如果key重复是否替换  bool",
     "Priority": "优先级，默认是5  int?",
     "StartTime": "开始时间  DateTimeOffset?",
