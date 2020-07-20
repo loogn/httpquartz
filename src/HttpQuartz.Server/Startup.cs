@@ -6,6 +6,7 @@ using HttpQuartz.Server.Tools.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,6 +66,10 @@ namespace HttpQuartz.Server
 
             app.UseCookiePolicy();
 
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor
+            });
             app.UseRouting();
             app.UseAuthentication(); //认证
             app.UseAuthorization(); //授权
