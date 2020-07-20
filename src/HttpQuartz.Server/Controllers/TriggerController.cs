@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Autowired.Core;
 using CoreHelper;
+using HttpQuartz.Server.BgServices.QuartzScheduler;
 using HttpQuartz.Server.Services;
 using HttpQuartz.Server.Tools;
 using Microsoft.AspNetCore.Mvc;
@@ -85,6 +86,13 @@ namespace HttpQuartz.Server.Controllers
         {
             var key = new TriggerKey(name, group);
             await scheduler.ResumeTrigger(key);
+            return new ResultObject(true);
+        }
+        public async Task<ResultObject> TriggerJob(string name, string group)
+        {
+            var key = new TriggerKey(name, group);
+            var trigger = await scheduler.GetTrigger(key);
+            await scheduler.TriggerJob(HttpJob.JobKey, trigger.JobDataMap);
             return new ResultObject(true);
         }
     }

@@ -9,10 +9,13 @@
 
             <div class="layui-row layui-col-space10">
                 <div class="layui-col-md6">
-                    <div style="max-height: 550px; overflow: auto">
+                    <div style="max-height: 550px; overflow: auto;margin-bottom: 15px">
                         <pre>@Html.Raw(ViewBag.doc)</pre>
                     </div>
-                    <p style="color:#cccccc;">触发器说明，4个Trigger最多可以存在1个</p>
+                    <p style="color:#cccccc;">
+                        4个Trigger最多可以存在1个。 &nbsp;&nbsp;&nbsp;&nbsp;
+                       <a target="_blank" href="https://www.pppet.net/">CRON在线生成工具</a>
+                    </p>
                 </div>
                 <div class="layui-col-md6">
                     <form class="layui-form">
@@ -21,6 +24,7 @@
                         </div>
                         <div class="layui-form-item">
                             <button class="layui-btn" type="button" id="btn">添加触发器</button>
+                             
                         </div>
                     </form>
                 </div>
@@ -39,7 +43,7 @@
         console.log(json);
         $.ajax({
             type:"post",
-            url:'@Url.Action("ScheduleJob","Quartz")',
+            url:'@Url.Action("ScheduleJob", "Quartz")',
             dataType:'text',
             contentType: "application/json;charset=utf-8",
             data:json,

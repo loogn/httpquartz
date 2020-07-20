@@ -4,6 +4,7 @@
     var plist = ViewBag.plist as StaticPagedList<QRTZ_TRIGGERS>;
 
 }
+
 @section Styles
 {
     <style>
@@ -14,6 +15,7 @@
         }
     </style>
 }
+
 <partial name="breadcrumb"/>
 
 <div class="layui-fluid">
@@ -70,7 +72,7 @@
                     <th>触发时间</th>
                     <th>时间周期</th>
                     <th style="width: 30%">关联数据</th>
-                    <th>操作</th>
+                    <th>开关|删除|触发</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -97,16 +99,25 @@
                         <td> @Encoding.UTF8.GetString(item.JOB_DATA) </td>
                         <td class="td-manage">
                             <div class="layui-btn-group">
-                              
+
                                 @if (item.TRIGGER_STATE == "PAUSED")
                                 {
-                                    <button type="button" class="layui-btn layui-btn-warm" onclick="ResumeTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">恢复</button>
+                                    <button title="恢复" type="button" class="layui-btn layui-btn-warm" onclick="ResumeTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
+                                        <i class="layui-icon layui-icon-play"></i>
+                                    </button>
                                 }
                                 else
                                 {
-                                    <button type="button" class="layui-btn  layui-btn-normal" onclick="PauseTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">暂停</button>
+                                    <button title="暂停" type="button" class="layui-btn  layui-btn-normal" onclick="PauseTrigger('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
+                                        <i class="layui-icon layui-icon-pause"></i>
+                                    </button>
                                 }
-                                <button type="button" class="layui-btn layui-btn-danger" onclick="UnscheduleJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">删除</button>
+                                <button title="删除" type="button" class="layui-btn layui-btn-danger" onclick="UnscheduleJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
+                                    <i class="layui-icon layui-icon-delete"></i>
+                                </button>
+                                <button title="触发" type="button" class="layui-btn" onclick="TriggerJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
+                                    <i class="layui-icon layui-icon-fire"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -159,6 +170,14 @@
         { name: name,group:group },
         function(ro) {
             location.reload();
+        });
+    }
+    
+    function TriggerJob(name,group){
+        $.post("@Url.Action("TriggerJob")",
+        { name: name,group:group },
+        function(ro) {
+            layer.msg("触发成功",{ time: 500 });
         });
     }
 
