@@ -10,7 +10,9 @@
     <div class="layui-card">
 
         <div class="layui-card-body">
-            <form class="layui-form" lay-filter="searchFrm" id="frm">
+
+            <form class="layui-form layui-clear" lay-filter="searchFrm" id="frm">
+
                 <div class="layui-inline">
                     <input class="layui-input ml-0" name="date" placeholder="日期" id="date" value="@Context.Request.Query["date"]"/>
                 </div>
@@ -20,7 +22,14 @@
                         <i class="layui-icon">&#xe615;</i>
                     </button>
                 </div>
+                <div class="layui-inline" style="float: right">
+                    <button class="layui-btn" type="button" id="btnDel" lay-submit="" lay-filter="del">
+                        <i class="layui-icon layui-icon-delete"></i>清空日志
+                    </button>
+                </div>
+
             </form>
+
         </div>
         <div class="layui-card-body">
             <div style="max-height: 600px;
@@ -47,5 +56,13 @@ var laydate = layui.laydate;
         $("#frm").submit();
        }
   });
+  
+  $("#btnDel").click(function(){
+      var data="date="+$("#date").val();
+      
+      $.post('@Url.Action("DeleteLog")',data,function(){
+          location.reload();
+      })
+  })
     </script>
 }

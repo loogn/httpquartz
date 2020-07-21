@@ -183,6 +183,14 @@ namespace HttpQuartz.Server.Controllers
             return View();
         }
 
+        public IActionResult DeleteLog(DateTime? date)
+        {
+            if (date == null) date = DateTime.Now;
+            var file = $"logs/{date.Value:yyyyMMdd}.log";
+            System.IO.File.WriteAllText(file, "");
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<IActionResult> ScheduleJob([FromBody] TriggerModel model)
         {
