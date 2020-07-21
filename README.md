@@ -64,7 +64,7 @@ Install-Package HttpQuartz.Client -Version 0.0.1
 
 #### 相关
 
-[Quartz.Net项目](http://wwww.baidu.com)  
+[Quartz.Net项目](https://www.quartz-scheduler.net/)  
  
 [Polly项目](http://www.thepollyproject.org/)
 
