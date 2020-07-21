@@ -72,10 +72,10 @@
                 <tr>
                     <th>基本信息</th>
                     <th>类型</th>
-                    <th>触发时间</th>
-                    <th>时间周期</th>
+                    <th>上下触发时间</th>
+                    <th>开始结束时间</th>
                     <th style="width: 30%">关联数据</th>
-                    <th>开关|触发|编辑|删除</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -92,12 +92,12 @@
                             @item.GetMisFireINSTR()
                         </td>
                         <td>
-                            上次： @item.GetTime(item.PREV_FIRE_TIME) <br/>
-                            下次：@item.GetTime(item.NEXT_FIRE_TIME)
+                            ↑: @item.GetTime(item.PREV_FIRE_TIME) <br/>
+                            ↓: @item.GetTime(item.NEXT_FIRE_TIME)
                         </td>
                         <td>
-                            开始：@item.GetTime(item.START_TIME)<br/>
-                            结束：@item.GetTime(item.END_TIME)
+                            ►: @item.GetTime(item.START_TIME)<br/>
+                            ◉: @item.GetTime(item.END_TIME)
                         </td>
                         <td> @Encoding.UTF8.GetString(item.JOB_DATA) </td>
                         <td class="td-manage">
