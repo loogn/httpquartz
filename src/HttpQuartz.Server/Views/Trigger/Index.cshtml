@@ -23,17 +23,17 @@
     <div class="layui-card">
 
         <div class="layui-card-body">
-            <form class="layui-form" lay-filter="searchFrm">
+            <form class="layui-form layui-clear" lay-filter="searchFrm">
                 <div class="layui-inline">
                     <input class="layui-input ml-0" name="name" placeholder="名称" id="name" value="@Context.Request.Query["name"]"/>
                 </div>
                 <div class="layui-inline">
                     @* <input class="layui-input ml-0" name="group" placeholder="分组" id="group" value="@Context.Request.Query["group"]"/> *@
                     <select class="layui-select" name="group" id="group">
-                    <option value="">-全部分组-</option>
+                        <option value="">-全部分组-</option>
                         @foreach (var group in groups)
                         {
-                            <option value="@group">@group</option>    
+                            <option value="@group">@group</option>
                         }
                     </select>
                 </div>
@@ -64,14 +64,17 @@
                         <i class="layui-icon">&#xe615;</i>
                     </button>
                 </div>
+
+                <div class="layui-inline" style="float: right">
+                    <button type="button" class="layui-btn layui-btn-normal" onclick="xadmin.open('添加任务', '@Url.Action("Edit", new {parentId = 0})', 0,0,true)">
+                        <i class="layui-icon layui-icon-add-circle-fine"></i>添加任务
+                    </button>
+                </div>
+                
             </form>
         </div>
 
-        <div class="layui-card-header ">
-            <button class="layui-btn layui-btn-normal" onclick="xadmin.open('添加任务', '@Url.Action("Edit", new {parentId = 0})', 0,0,true)">
-                <i class="layui-icon layui-icon-add-circle-fine"></i>添加
-            </button>
-        </div>
+
         <div class="layui-card-body">
 
             <table class="layui-table">
