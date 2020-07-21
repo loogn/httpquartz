@@ -70,6 +70,11 @@ namespace HttpQuartz.Server.Services
             return qrtzTriggersDao.SingleSimpleTrigger(sched, name, group);
         }
 
+        public QRTZ_SIMPROP_TRIGGERS SinglePropTrigger(string sched, string name, string group)
+        {
+            return qrtzTriggersDao.SinglePropTrigger(sched, name, group);
+        }
+
        
     }
 }

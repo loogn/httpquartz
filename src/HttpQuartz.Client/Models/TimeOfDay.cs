@@ -5,6 +5,10 @@ namespace HttpQuartz.Client.Models
     [Serializable]
     public class TimeOfDayInfo
     {
+        public TimeOfDayInfo()
+        {
+        }
+
         /// <summary>
         /// Create a TimeOfDay instance for the given hour, minute and second.
         /// </summary>

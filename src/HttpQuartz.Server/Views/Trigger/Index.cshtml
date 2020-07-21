@@ -32,7 +32,7 @@
                 </div>
                 <div class="layui-inline">
                     <select class="layui-select" name="state" id="state">
-                        <option value="">-状态-</option>
+                        <option value="">-全部状态-</option>
                         <option value="ACQUIRED">ACQUIRED</option>
                         <option value="PAUSED">PAUSED</option>
                         <option value="WAITING">WAITING</option>
@@ -43,9 +43,12 @@
 
                 <div class="layui-inline">
                     <select class="layui-select" name="type" id="type">
-                        <option value="">-类型-</option>
+                        <option value="">-全部类型-</option>
                         <option value="SIMPLE">SIMPLE</option>
                         <option value="CRON">CRON</option>
+                        <option value="CAL_INT">CAL_INT</option>
+                        <option value="DAILY_I">DAILY_I</option>
+
                     </select>
                 </div>
 
@@ -58,7 +61,7 @@
         </div>
 
         <div class="layui-card-header ">
-            <button class="layui-btn layui-btn-normal" onclick="xadmin.open('添加触发器', '@Url.Action("Edit", new {parentId = 0})', 0,0,true)">
+            <button class="layui-btn layui-btn-normal" onclick="xadmin.open('添加任务', '@Url.Action("Edit", new {parentId = 0})', 0,0,true)">
                 <i class="layui-icon layui-icon-add-circle-fine"></i>添加
             </button>
         </div>
@@ -72,7 +75,7 @@
                     <th>触发时间</th>
                     <th>时间周期</th>
                     <th style="width: 30%">关联数据</th>
-                    <th>开关|删除|触发</th>
+                    <th>开关|触发|编辑|删除</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -85,7 +88,7 @@
                             @item.DESCRIPTION
                         </td>
                         <td>
-                            <a href="javascript:;" onclick="xadmin.open('触发器详细', '@Url.Action("Detail", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 300,200)">@item.TRIGGER_TYPE</a><br/>
+                            <a href="javascript:;" onclick="xadmin.open('触发器详细', '@Url.Action("Detail", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 400,250)">@item.TRIGGER_TYPE</a><br/>
                             @item.GetMisFireINSTR()
                         </td>
                         <td>
@@ -112,12 +115,18 @@
                                         <i class="layui-icon layui-icon-pause"></i>
                                     </button>
                                 }
+                                <button title="触发" type="button" class="layui-btn layui-btn-normal" onclick="TriggerJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
+                                    <i class="layui-icon layui-icon-fire"></i>
+                                </button>
+
+                                <button title="编辑" type="button" class="layui-btn layui-btn-normal" onclick="xadmin.open('编辑任务', '@Url.Action("Edit", new {name = item.TRIGGER_NAME, group = item.TRIGGER_GROUP, type = item.TRIGGER_TYPE})', 0,0,true)">
+                                    <i class="layui-icon layui-icon-edit"></i>
+                                </button>
+
                                 <button title="删除" type="button" class="layui-btn layui-btn-danger" onclick="UnscheduleJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
                                     <i class="layui-icon layui-icon-delete"></i>
                                 </button>
-                                <button title="触发" type="button" class="layui-btn" onclick="TriggerJob('@item.TRIGGER_NAME','@item.TRIGGER_GROUP')">
-                                    <i class="layui-icon layui-icon-fire"></i>
-                                </button>
+
                             </div>
                         </td>
                     </tr>
@@ -174,12 +183,14 @@
     }
     
     function TriggerJob(name,group){
-        $.post("@Url.Action("TriggerJob")",
-        { name: name,group:group },
-        function(ro) {
-            layer.msg("触发成功",{ time: 500 });
-        });
-    }
-
+        
+        layer.confirm('确定立刻触发吗？',function() {
+                    $.post("@Url.Action("TriggerJob")",
+                            { name: name,group:group },
+                            function(ro) {
+                                layer.msg("触发成功",{ time: 500 });
+                            });               
+                });
+    }   
     </script>
 }

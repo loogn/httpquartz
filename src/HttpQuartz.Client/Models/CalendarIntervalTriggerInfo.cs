@@ -28,5 +28,10 @@ namespace HttpQuartz.Client.Models
 
         public bool PreserveHourOfDayAcrossDaylightSavings { get; set; }
         public bool SkipDayIfHourDoesNotExist { get; set; }
+        
+        /// <summary>
+        /// 时区ID,默认不填是本地时区，即PRC
+        /// </summary>
+        public string TimeZoneId { get; set; }
     }
 }

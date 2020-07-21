@@ -22,18 +22,20 @@
     },
     "CronTrigger": {
         "CronExpression": "0,12 * * * * ?",
-        "MisfireInstruction": 0
+        "MisfireInstruction": 0,
+        "TimeZoneId":""
     },
     "CalendarIntervalTrigger": {
         "RepeatInterval": 0,
-        "RepeatIntervalUnit": 0,
+        "RepeatIntervalUnit": 3,
         "MisfireInstruction": 0,
         "PreserveHourOfDayAcrossDaylightSavings": false,
-        "SkipDayIfHourDoesNotExist": false
+        "SkipDayIfHourDoesNotExist": false,
+        "TimeZoneId":""
     },
     "DailyTimeIntervalTrigger": {
         "RepeatInterval": 0,
-        "RepeatIntervalUnit": 4,
+        "RepeatIntervalUnit": 2,
         "RepeatCount": -1,
         "StartTimeOfDay": {
             "Hour": 3,
@@ -44,6 +46,7 @@
         "DaysOfWeek": [
             5
         ],
-        "MisfireInstruction": 0
+        "MisfireInstruction": 0,
+        "TimeZoneId":""
     }
 }

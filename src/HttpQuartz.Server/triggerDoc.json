@@ -6,7 +6,7 @@
     "Description":"描述 string",
     "Reschedule": "如果key重复是否替换  bool",
     "Priority": "优先级，默认是5  int?",
-    "StartTime": "开始时间  DateTimeOffset?",
+    "StartTime": "开始时间 如： 2020-07-07T11:40:00+08:00  DateTimeOffset?",
     "EndTime": "结束时间  DateTimeOffset?",
     "JobData": {
         "method": "请求方法，默认GET  string",
@@ -22,18 +22,20 @@
     },
     "CronTrigger": {
         "CronExpression": "cron表达式  string",
-        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int"
+        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int",
+        "TimeZoneId" :"时区ID,如Asia/Shanghai、PRC、UTC。默认不填是本地时区，即PRC  string"
     },
     "CalendarIntervalTrigger": {
         "RepeatInterval": "重复间隔时间  int",
-        "RepeatIntervalUnit": "重复间隔单位 0-毫秒,1-秒,2-分,3-时,4-天,5-周,6-月,7-年   int",
+        "RepeatIntervalUnit": "重复间隔单位 1-秒,2-分,3-时,4-天,5-周,6-月,7-年  int",
         "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int",
-        "PreserveHourOfDayAcrossDaylightSavings": false,
-        "SkipDayIfHourDoesNotExist": false
+        "PreserveHourOfDayAcrossDaylightSavings": "参考官方文档，默认false bool",
+        "SkipDayIfHourDoesNotExist": "参考官方文档，默认false bool",
+        "TimeZoneId" :"时区ID,如Asia/Shanghai、PRC、UTC。默认不填是本地时区，即PRC  string"
     },
     "DailyTimeIntervalTrigger": {
         "RepeatInterval": "重复间隔时间  int",
-        "RepeatIntervalUnit": "重复间隔单位 0-毫秒,1-秒,2-分,3-时,4-天,5-周,6-月,7-年   int",
+        "RepeatIntervalUnit": "重复间隔单位 1-秒,2-分,3-时   int",
         "RepeatCount": "重复次数，默认-1是永久重复  int",
         "StartTimeOfDay": {
             "Hour": 3,
@@ -42,6 +44,7 @@
         },
         "EndTimeOfDay": "当天结束时间  TimeOfDay",
         "DaysOfWeek": "有效周天集合,0-周日,1-周一,2-周二,3-周三,4-周四,5-周五,6-周六  int[]",
-        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int"
+        "MisfireInstruction": "失火指令 -1-IgnoreMisfirePolicy忽略其他指令，有资源就出发所有MisFire任务,1-FireOnceNow马上调度并继续(默认),2-DoNothing  int",
+        "TimeZoneId" :"时区ID,如Asia/Shanghai、PRC、UTC。默认不填是本地时区，即PRC  string"
     }
 }

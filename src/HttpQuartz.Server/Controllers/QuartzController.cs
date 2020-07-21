@@ -49,6 +49,7 @@ namespace HttpQuartz.Server.Controllers
                 {
                     builder.WithDescription(model.Description);
                 }
+
                 if (model.StartTime.HasValue)
                 {
                     builder.StartAt(model.StartTime.Value);
@@ -70,6 +71,7 @@ namespace HttpQuartz.Server.Controllers
                 builder.UsingJobData("url", model.JobData.url);
                 builder.UsingJobData("expRefire", model.JobData.expRefire.ToString());
                 builder.UsingJobData("expRemove", model.JobData.expRemove.ToString());
+                builder.UsingJobData("body", model.JobData.body);
 
                 #region trigger
 
@@ -120,6 +122,12 @@ namespace HttpQuartz.Server.Controllers
                                 scheduleBuilder.WithMisfireHandlingInstructionDoNothing();
                                 break;
                         }
+
+                        if (!string.IsNullOrEmpty(model.CronTrigger.TimeZoneId))
+                        {
+                            scheduleBuilder.InTimeZone(
+                                TimeZoneInfo.FindSystemTimeZoneById(model.CronTrigger.TimeZoneId));
+                        }
                     });
                 }
 
@@ -145,6 +153,12 @@ namespace HttpQuartz.Server.Controllers
                             case 2:
                                 scheduleBuilder.WithMisfireHandlingInstructionDoNothing();
                                 break;
+                        }
+
+                        if (!string.IsNullOrEmpty(model.CalendarIntervalTrigger.TimeZoneId))
+                        {
+                            scheduleBuilder.InTimeZone(
+                                TimeZoneInfo.FindSystemTimeZoneById(model.CalendarIntervalTrigger.TimeZoneId));
                         }
                     });
                 }
@@ -189,6 +203,12 @@ namespace HttpQuartz.Server.Controllers
                             case 2:
                                 scheduleBuilder.WithMisfireHandlingInstructionDoNothing();
                                 break;
+                        }
+
+                        if (!string.IsNullOrEmpty(model.DailyTimeIntervalTrigger.TimeZoneId))
+                        {
+                            scheduleBuilder.InTimeZone(
+                                TimeZoneInfo.FindSystemTimeZoneById(model.DailyTimeIntervalTrigger.TimeZoneId));
                         }
                     });
                 }

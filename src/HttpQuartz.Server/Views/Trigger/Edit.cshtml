@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "编辑角色";
+    ViewBag.Title = "编辑任务";
 
 }
 
@@ -23,7 +23,7 @@
                             <textarea style="min-height: 550px" id="json" class="layui-textarea">@Html.Raw(ViewBag.tpl)</textarea>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" type="button" id="btn">添加触发器</button>
+                            <button class="layui-btn" type="button" id="btn">保存</button>
                              
                         </div>
                     </form>
@@ -49,7 +49,7 @@
             data:json,
             success:function(result){
                   layer.msg(result,
-                        { time: 1000 },
+                        { time: 1500 },
                         function() {
                             if (result=="success") {
                                 closeXWindow();

@@ -20,6 +20,11 @@ namespace HttpQuartz.Client.Models
         /// DoNothing=2
         /// </summary>
         public int MisfireInstruction { get; set; }
+        
+        /// <summary>
+        /// 时区ID,默认不填是本地时区，即PRC
+        /// </summary>
+        public string TimeZoneId { get; set; }
     }
 
 }

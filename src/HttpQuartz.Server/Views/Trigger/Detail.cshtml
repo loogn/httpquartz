@@ -1,7 +1,9 @@
 ﻿@{
     ViewData["Title"] = "触发器详细";
+    var type = ViewBag.type as string;
     var simple = ViewBag.simple as QRTZ_SIMPLE_TRIGGERS;
     var cron = ViewBag.cron as QRTZ_CRON_TRIGGERS;
+    var prop = ViewBag.prop as QRTZ_SIMPROP_TRIGGERS;
 }
 
 <partial name="breadcrumb"/>
@@ -24,7 +26,32 @@
             {
                 <div>
                     <p>cron表达式: @cron.CRON_EXPRESSION</p>
+                    <p>时区ID: @cron.TIME_ZONE_ID</p>
                 </div>
+            }
+            else if (prop != null)
+            {
+                if (type == "CAL_INT")
+                {
+                    <div>
+                        <p>间隔数量: @prop.INT_PROP_1</p>
+                        <p>间隔单位: @prop.STR_PROP_1</p>
+                        <p>PreserveHourOfDayAcrossDaylightSavings: @prop.BOOL_PROP_1</p>
+                        <p>SkipDayIfHourDoesNotExist: @prop.BOOL_PROP_1</p>
+                        <p>时区ID: @prop.TIME_ZONE_ID</p>
+                    </div>
+                }
+                else if (type == "DAILY_I")
+                {
+                    <div>
+                        <p>间隔数量: @prop.INT_PROP_1</p>
+                        <p>间隔单位: @prop.STR_PROP_1</p>
+                        <p>重复次数: @prop.LONG_PROP_1</p>
+                        <p>天中时间: @prop.STR_PROP_3</p>
+                        <p>周天集合: @prop.STR_PROP_2</p>
+                        <p>时区ID: @prop.TIME_ZONE_ID</p>
+                    </div>
+                }
             }
         </div>
 
