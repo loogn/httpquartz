@@ -31,7 +31,7 @@
 
 安装：
 ```c#
-Install-Package HttpQuartz.Client -Version 0.0.1
+Install-Package HttpQuartz.Client
 ```
 
 使用：
