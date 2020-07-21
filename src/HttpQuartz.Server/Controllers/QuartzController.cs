@@ -34,12 +34,18 @@ namespace HttpQuartz.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> ScheduleJob([FromBody] TriggerModel model)
         {
+            return await ScheduleJob(this, scheduler, model);
+        }
+        
+        
+        public static async Task<IActionResult> ScheduleJob(Controller controller,IScheduler scheduler,  TriggerModel model)
+        {
             try
             {
                 //check;
                 if (model?.Key == null || model.JobData == null)
                 {
-                    return Ok("key和jobdata不能为空");
+                    return controller.Ok("key和jobdata不能为空");
                 }
 
                 var key = new TriggerKey(model.Key.Name, model.Key.Group);
@@ -224,25 +230,25 @@ namespace HttpQuartz.Server.Controllers
                     if (oldTrigger == null)
                     {
                         var result = await scheduler.ScheduleJob(trigger);
-                        return Ok("success");
+                        return controller.Ok("success");
                     }
                     else
                     {
                         var result = await scheduler.RescheduleJob(key, trigger);
-                        return Ok(result.HasValue ? "success" : "fail");
+                        return controller.Ok(result.HasValue ? "success" : "fail");
                     }
                 }
                 else
                 {
                     var result = await scheduler.ScheduleJob(trigger);
-                    return Ok("success");
+                    return controller.Ok("success");
                 }
             }
             catch (Exception e)
             {
                 //log?
                 await Console.Error.WriteLineAsync(e.StackTrace);
-                return Ok(e.Message);
+                return controller.Ok(e.Message);
             }
         }
 

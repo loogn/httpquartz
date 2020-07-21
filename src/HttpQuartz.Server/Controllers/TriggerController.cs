@@ -179,6 +179,12 @@ namespace HttpQuartz.Server.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ScheduleJob([FromBody] TriggerModel model)
+        {
+            return await QuartzController.ScheduleJob(this, scheduler, model);
+        }
+
         public async Task<ResultObject> UnscheduleJob(string name, string group)
         {
             var key = new TriggerKey(name, group);
