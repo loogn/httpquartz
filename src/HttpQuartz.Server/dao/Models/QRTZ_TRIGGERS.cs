@@ -5,7 +5,7 @@ namespace HttpQuartz.Server.dao.Models
     /// <summary>
     /// 
     /// </summary>
-    public partial class QRTZ_TRIGGERS
+    public partial class QRTZ_TRIGGERS:QRTZ_TRIGGERKEY
     {
         public string SCHED_NAME { get; set; }
 

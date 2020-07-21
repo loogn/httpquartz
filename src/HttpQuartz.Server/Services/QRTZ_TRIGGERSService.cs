@@ -16,7 +16,6 @@ namespace HttpQuartz.Server.Services
         public QRTZ_TRIGGERSService(AutowiredService autowiredService)
         {
             autowiredService.Autowired(this);
-            
         }
 
         public OrmLitePageResult<QRTZ_TRIGGERS> SelectPage(string sched, string name, string group, string state,
@@ -60,21 +59,25 @@ namespace HttpQuartz.Server.Services
             });
         }
 
+
+        public QRTZ_TRIGGERS SingleTrigger(string sched, string name, string group)
+        {
+            return qrtzTriggersDao.SingleTrigger<QRTZ_TRIGGERS>(sched, name, group);
+        }
+
         public QRTZ_CRON_TRIGGERS SingleCronTrigger(string sched, string name, string group)
         {
-            return qrtzTriggersDao.SingleCronTrigger(sched, name, group);
+            return qrtzTriggersDao.SingleTrigger<QRTZ_CRON_TRIGGERS>(sched, name, group);
         }
 
         public QRTZ_SIMPLE_TRIGGERS SingleSimpleTrigger(string sched, string name, string group)
         {
-            return qrtzTriggersDao.SingleSimpleTrigger(sched, name, group);
+            return qrtzTriggersDao.SingleTrigger<QRTZ_SIMPLE_TRIGGERS>(sched, name, group);
         }
 
         public QRTZ_SIMPROP_TRIGGERS SinglePropTrigger(string sched, string name, string group)
         {
-            return qrtzTriggersDao.SinglePropTrigger(sched, name, group);
+            return qrtzTriggersDao.SingleTrigger<QRTZ_SIMPROP_TRIGGERS>(sched, name, group);
         }
-
-       
     }
 }

@@ -5,12 +5,14 @@ using Autowired.Core;
 using HttpQuartz.Client.Models;
 using HttpQuartz.Server.BgServices.QuartzScheduler;
 using HttpQuartz.Server.Models;
+using HttpQuartz.Server.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Quartz;
+using Quartz.Impl.Triggers;
 using IntervalUnit = Quartz.IntervalUnit;
 
 namespace HttpQuartz.Server.Controllers
@@ -25,6 +27,7 @@ namespace HttpQuartz.Server.Controllers
 
         [Autowired] private ILogger<QuartzController> logger;
         [Autowired] private AppSettings appSettings;
+        [Autowired] private QRTZ_TRIGGERSService service;
 
         public QuartzController(AutowiredService autowiredService)
         {
@@ -34,11 +37,12 @@ namespace HttpQuartz.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> ScheduleJob([FromBody] TriggerModel model)
         {
-            return await ScheduleJob(this, scheduler, model);
+            return await ScheduleJob(this, scheduler, service, model);
         }
-        
-        
-        public static async Task<IActionResult> ScheduleJob(Controller controller,IScheduler scheduler,  TriggerModel model)
+
+
+        public static async Task<IActionResult> ScheduleJob(Controller controller, IScheduler scheduler,
+            QRTZ_TRIGGERSService service, TriggerModel model)
         {
             try
             {
@@ -234,7 +238,14 @@ namespace HttpQuartz.Server.Controllers
                     }
                     else
                     {
+                        var dbm = service.SingleTrigger(scheduler.SchedulerName, key.Name, key.Group);
                         var result = await scheduler.RescheduleJob(key, trigger);
+                        //如果原来是暂停状态，需要修改成暂停状态
+                        if (dbm.TRIGGER_STATE == "PAUSED")
+                        {
+                            await scheduler.PauseTrigger(key);
+                        }
+
                         return controller.Ok(result.HasValue ? "success" : "fail");
                     }
                 }

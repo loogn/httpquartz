@@ -6,7 +6,7 @@ namespace HttpQuartz.Server.dao.Models
     /// <summary>
     /// 简单属性触发器
     /// </summary>
-    public partial class QRTZ_SIMPROP_TRIGGERS
+    public partial class QRTZ_SIMPROP_TRIGGERS:QRTZ_TRIGGERKEY
     {
         public string SCHED_NAME { get; set; }
 

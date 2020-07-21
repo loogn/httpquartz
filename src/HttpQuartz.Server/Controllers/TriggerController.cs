@@ -143,7 +143,7 @@ namespace HttpQuartz.Server.Controllers
                     WriteIndented = true,
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
                 });
-                
+
                 ViewBag.tpl = tpl;
             }
 
@@ -186,7 +186,7 @@ namespace HttpQuartz.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> ScheduleJob([FromBody] TriggerModel model)
         {
-            return await QuartzController.ScheduleJob(this, scheduler, model);
+            return await QuartzController.ScheduleJob(this, scheduler, service, model);
         }
 
         public async Task<ResultObject> UnscheduleJob(string name, string group)

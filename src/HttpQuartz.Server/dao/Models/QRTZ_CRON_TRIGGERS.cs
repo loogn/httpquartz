@@ -3,7 +3,7 @@ namespace HttpQuartz.Server.dao.Models
     /// <summary>
     /// 
     /// </summary>
-    public partial class QRTZ_CRON_TRIGGERS
+    public partial class QRTZ_CRON_TRIGGERS:QRTZ_TRIGGERKEY
     {
         public string SCHED_NAME { get; set; }
 
