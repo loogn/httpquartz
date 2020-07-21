@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>0.0.1</PackageVersion>
+        <PackageVersion>0.0.3</PackageVersion>
         <Title>HttpQuartz.Client</Title>
         <Authors>loogn</Authors>
         <Description>HttpQuartz Api tools</Description>

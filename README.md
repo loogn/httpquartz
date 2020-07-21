@@ -56,6 +56,12 @@ Install-Package HttpQuartz.Client -Version 0.0.1
     });
 ```
 
+#### UI管理截图
+![任务列表](https://gitee.com/loogn/httpquartz/raw/master/img/tasklist.png)
+
+![编辑任务](https://gitee.com/loogn/httpquartz/raw/master/img/addtask.png)
+
+
 #### 相关
 
 [Quartz.Net项目](http://wwww.baidu.com)  
