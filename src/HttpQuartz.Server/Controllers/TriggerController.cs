@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Autowired.Core;
 using CoreHelper;
@@ -139,7 +141,9 @@ namespace HttpQuartz.Server.Controllers
                 {
                     IgnoreNullValues = true,
                     WriteIndented = true,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
                 });
+                
                 ViewBag.tpl = tpl;
             }
 
