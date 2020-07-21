@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "触发器";
     var plist = ViewBag.plist as StaticPagedList<QRTZ_TRIGGERS>;
-
+    var groups = ViewBag.groups as IReadOnlyCollection<string>;
 }
 
 @section Styles
@@ -28,7 +28,14 @@
                     <input class="layui-input ml-0" name="name" placeholder="名称" id="name" value="@Context.Request.Query["name"]"/>
                 </div>
                 <div class="layui-inline">
-                    <input class="layui-input ml-0" name="group" placeholder="分组" id="group" value="@Context.Request.Query["group"]"/>
+                    @* <input class="layui-input ml-0" name="group" placeholder="分组" id="group" value="@Context.Request.Query["group"]"/> *@
+                    <select class="layui-select" name="group" id="group">
+                    <option value="">-全部分组-</option>
+                        @foreach (var group in groups)
+                        {
+                            <option value="@group">@group</option>    
+                        }
+                    </select>
                 </div>
                 <div class="layui-inline">
                     <select class="layui-select" name="state" id="state">
@@ -143,10 +150,10 @@
     
     $(function(){
         
+       $("#group").val('@Context.Request.Query["group"]');
        $("#state").val('@Context.Request.Query["state"]');
        $("#type").val('@Context.Request.Query["type"]');
        layui.form.render('select', 'searchFrm');
-        
     });
     
     function UnscheduleJob(name,group){

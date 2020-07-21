@@ -26,13 +26,13 @@ namespace HttpQuartz.Server.Controllers
             autowiredService.Autowired(this);
         }
 
-        public IActionResult Index(string name, string group, string state,
+        public async Task<IActionResult> Index(string name, string group, string state,
             string type, int page = 1)
         {
             int pageSize = 10;
             var plist = service.SelectPage(scheduler.SchedulerName, name, group, state, type, page, pageSize);
             ViewBag.plist = plist.ToStaticPagedList();
-
+            ViewBag.groups = await scheduler.GetTriggerGroupNames();
             return View();
         }
 
